@@ -1,12 +1,60 @@
 ## prometheus
 
+### [1.部署](#1)
+
+#### [1.1.二进制部署](#1.1)
+
+##### [1.1.1.promtheus常用参数](#1.1.1)
+
+##### [1.1.2.编写prometheus.service文件](#1.1.2)
+
+#### [1.2.docker部署](#1.2)
+
+### [2.配置文件](#2)
+
+#### [2.1.案例:node_exporter](#2.1)
+
+##### [2.1.1.node_exporter](#2.1.1)
+
+##### [2.1.2.和prometheus集成](#2.1.2)
+
+### [3.promQL](#3)
+
+#### [3.1.样本和数据类型](#3.1)
+
+#### [3.2.promQL查询](#3.2)
+
+##### [3.2.1.基本查询](#3.2.1)
+
+##### [3.2.2.范围查询](#3.2.2)
+
+##### [3.2.3.函数使用](#3.2.3)
+
+### [4.报警](#4)
+
+#### [4.1.alertmanager简介](#4.1)
+
+#### [4.2.alertmanager特性](#4.2)
+
+#### [4.3.示例](#4.3)
+
+#### [4.4.alertmanager部署](#4.4)
+
+#### [4.5.抑制报警](#4.4)
+
+#### [4.6.优化](#4.6)
+
+### [5.服务发现](#5)
+
+#### [5.1.relabel机制](#5)
+
 **prometheus架构图**
 
 <img src="image/prometheus架构图.png" style="zoom:80%;" />
 
-### 1.部署
+### <span id="1">1.部署</span>
 
-#### 1.1.二级制部署
+#### <span id="1.1">1.1.二进制部署</span>
 
 ```bash
 [root@node02 opt]# wget https://github.com/prometheus/prometheus/releases/download/v2.16.0-rc.1/prometheus-2.16.0-rc.1.linux-amd64.tar.gz
@@ -14,7 +62,7 @@
 [root@node02 opt]# mv prometheus-2.16.0-rc.0.linux-amd64 prometheus
 ```
 
-##### 1.1.1.prometheus常用参数
+##### <span id="1.1.1">1.1.1.prometheus常用参数</span>
 
 > prometheus命令
 
@@ -28,7 +76,7 @@
 - check config prometheus.yml #检查prometheus配置文件的格式
 - check rules rules #检查rule文件
 
-##### 1.1.2.编写prometheus.service文件
+##### <span id="1.1.2">1.1.2.编写prometheus.service文件</span>
 
 > 编写下面prometheus.service文件后可以使用systemctl start prometheus启动服务以及systemctl reload prometheus热加载prometheus的配置文件。
 
@@ -50,7 +98,7 @@ WantedBy=multi-user.target
 
 
 
-#### 1.2.docker部署
+#### <span id="1.2">1.2.docker部署</span>
 
 > 首先配置docker的加速地址
 
@@ -74,7 +122,7 @@ docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml  p
 
 
 
-### 2.配置文件（prometheus.yml）
+### <span id="2">2.配置文件（prometheus.yml）</span>
 
 > https://prometheus.io/docs/prometheus/latest/configuration/configuration/ 后续把每个部分配置细致化
 
@@ -86,9 +134,9 @@ alerting：#触发报警后由alertmanager组件接管
 remote_write remote_read：#远程存储和读取
 ```
 
-#### 2.1.案例:node_exporter
+#### <span id="2.1">2.1.案例:node_exporter</span>
 
-##### 2.1.1.node_exporter
+##### <span id="2.1.1">2.1.1.node_exporter</span>
 
 > prometheus的架构中，prometheus不是直接去获取监控目标的监控数据，而是周期性的从一个http接口获取监控的数据，然后存储，接着提供一个UI通过promQL查询监控数据。通常一个exporter暴露一个http接口，exporter可以是:
 >
@@ -141,7 +189,7 @@ node_exporter的目录只提供了一个node_exporter的二进制文件，只需
 go_goroutines 8
 ```
 
-##### 2.2.2.和prometheus集成
+##### <span id="2.1.2">2.1.2.和prometheus集成</span>
 
 ```bash
 [root@node01 prometheus]# vim prometheus.yml
@@ -162,9 +210,9 @@ scrape_configs:
 
 ![](image/promQL查询.png)
 
-### 3.promQL
+### <span id="3">3.promQL</span>
 
-#### 3.1.样本和数据类型
+#### <span id="3.1">3.1.样本和数据类型</span>
 
 Prometheus会将所有采集到的样本数据以时间序列（time-series）的方式保存在内存数据库中，并且定时保存到硬盘上。time-series是按照时间戳和值的序列顺序存放的。简单来讲，样本由指标名，时间序列，指标的值组成。
 
@@ -188,9 +236,9 @@ Gauge：可变化的值，可大可小，比如每天的访问量
 
 Histogram和Summary（Summary理解不了...）：直方图，Histogram的直方图是计算每个区间的值。
 
-#### 3.2.promQL查询
+#### <span id="3.2">3.2.promQL查询</span>
 
-##### 3.2.1.基本查询
+##### <span id="3.2.1">3.2.1.基本查询</span>
 
 输入192.168.111.111:9090/graph，直接在输入框中输入指标名称
 
@@ -202,7 +250,7 @@ up等于up{}，{}中可以输入标签名来过滤，比如输入up{job="prometh
 
 当输入up{job!="prometheus"}后会显示下面2个样本数据，查询也支持正则表达式，比如up{instance=~"192.*"}或者up{job!~"prometheus"}
 
-##### 3.2.2.范围查询
+##### <span id="3.2.2">3.2.2.范围查询</span>
 
 可以返回一段时间内所有的样本数据，通过[]来表示
 
@@ -223,19 +271,19 @@ up等于up{}，{}中可以输入标签名来过滤，比如输入up{job="prometh
 
 查询框还可以进行四则运算，返回的是**Scalar** 类型，也可以输入字符串，返回的是字符串
 
-##### 3.2.3.函数使用
+##### <span id="3.2.3">3.2.3.函数使用</span>
 
 > 官方文档：https://prometheus.io/docs/prometheus/latest/querying/functions/ 
 
-### 4.报警
+### <span id="4">4.报警</span>
 
-##### 4.1.alertmanager简介
+#### <span id="4.1">4.1.alertmanager简介</span>
 
 prometheus的报警分为两部分，一部分是在prometheus.yml中定义的报警规则，报警是由另一个组件Alertmanager实现，alertmanager可以与slack 微信等对接。alertmanager不支持和钉钉的对接，但是可以使用webhook和钉钉对接。
 
 ![](image/prometheus_alert.png)
 
-##### 4.2.alertmanager特性
+#### <span id="4.2">4.2.alertmanager特性</span>
 
 ![](image/alertmanager-features.png)
 
@@ -243,7 +291,7 @@ prometheus的报警分为两部分，一部分是在prometheus.yml中定义的�
 - **抑制**：抑制是指当某一告警发出后，可以停止重复发送由此告警引发的其它告警的机制。
 - **静默**：静默提供了一个简单的机制可以快速根据标签对告警进行静默处理。如果接收到的告警符合静默的配置，Alertmanager则不会发送告警通知。静默设置需要在Alertmanager的Werb页面上进行设置。
 
-##### 4.2.示例
+#### <span id="4.3">4.3.示例</span>
 
 首先需要编写报警的规则，需要在rule_files配置下配置rule的文件路径，可以写多个rule文件路径，也可以使用通配符
 
@@ -297,7 +345,7 @@ groups:
 
 触发了报警后还需要指定alertmanager地址，需要将报警的信息发送到slack等报警源。
 
-##### 4.3.alertmanager部署
+#### <span id="4.4">4.4.alertmanager部署</span>
 
 > https://github.com/prometheus/alertmanager/releases/download/v0.20.0/alertmanager-0.20.0.linux-amd64.tar.gz
 
@@ -404,7 +452,7 @@ receivers:
 
 ![](image/wy-email-alert.png)
 
-##### 4.4.报警抑制
+#### <span id="4.5">4.5.报警抑制</span>
 
 > https://prometheus.io/docs/alerting/configuration/#inhibit_rule
 
@@ -433,7 +481,7 @@ target_match表示触发的报警中标签有包含**severity: 'value1'**的话�
 
 ![](image/after-alert.png)
 
-##### 4.5.优化
+#### <span id="4.6">4.6.优化</span>
 
 > https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
 
@@ -447,7 +495,7 @@ groups:
       expr: sum(http_inprogress_requests) by (job)
 ```
 
-### 5.服务发现
+### <span id="5">5.服务发现</span>
 
 > https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config
 
@@ -490,7 +538,7 @@ scrape_configs:
 
 ![](image/file-sd.png)
 
-##### 5.1.relabel机制
+#### <span id="5.1">5.1.relabel机制</span>
 
 > https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
 
