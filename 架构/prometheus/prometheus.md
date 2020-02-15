@@ -1,5 +1,5 @@
 ## prometheus
-
+[说明文字](#jump)
 **prometheus架构图**
 
 <img src="image/prometheus架构图.png" style="zoom:80%;" />
@@ -13,7 +13,7 @@
 [root@node02 opt]# tar -xf prometheus-2.16.0-rc.0.linux-amd64.tar.gz
 [root@node02 opt]# mv prometheus-2.16.0-rc.0.linux-amd64 prometheus
 ```
-
+<span id = "jump">跳转位置</span>
 ##### 1.1.1.prometheus常用参数
 
 > prometheus命令
