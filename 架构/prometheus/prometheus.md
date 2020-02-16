@@ -2,11 +2,11 @@
 
 [1.部署](#1)
 
-  [1.1.二进制部署](#1.1)
+&nbsp;&nbsp;[1.1.二进制部署](#1.1)
 
-    [1.1.1.promtheus常用参数](#1.1.1)
+&nbsp;&nbsp;&nbsp;&nbsp;[1.1.1.promtheus常用参数](#1.1.1)
 
-    [1.1.2.编写prometheus.service文件](#1.1.2)
+&nbsp;&nbsp;&nbsp;&nbsp;[1.1.2.编写prometheus.service文件](#1.1.2)
 
   [1.2.docker部署](#1.2)
 
