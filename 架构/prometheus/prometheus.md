@@ -248,7 +248,7 @@ up等于up{}，{}中可以输入标签名来过滤，比如输入up{job="prometh
 
 ![](image/up_prometheus.png)
 
-当输入up{job!="prometheus"}后会显示下面2个样本数据，查询也支持正则表达式，比如up{instance=~"192.*"}或者up{job!~"prometheus"}
+当输入up{job!="prometheus"}后会显示下面2个样本数据，查询也支持正则表达式，比如up{instance=~"192.\*"}或者up{job!~"prometheus"}(\*会让md语法会产生斜线)
 
 ##### <span id="3.2.2">3.2.2.范围查询</span>
 
