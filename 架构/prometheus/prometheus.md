@@ -2,51 +2,51 @@
 
 [1.部署](#1)
 
-[1.1.二进制部署](#1.1)
+&nbsp;&nbsp;&nbsp;&nbsp;[1.1.二进制部署](#1.1)
 
-&nbsp;&nbsp;&nbsp;&nbsp;[1.1.1.promtheus常用参数](#1.1.1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.1.1.promtheus常用参数](#1.1.1)
 
-&nbsp;&nbsp;&nbsp;&nbsp;[1.1.2.编写prometheus.service文件](#1.1.2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.1.2.编写prometheus.service文件](#1.1.2)
 
-  [1.2.docker部署](#1.2)
+&nbsp;&nbsp;&nbsp;&nbsp;[1.2.docker部署](#1.2)
 
 [2.配置文件](#2)
 
-  [2.1.案例:node_exporter](#2.1)
+&nbsp;&nbsp;&nbsp;&nbsp;[2.1.案例:node_exporter](#2.1)
 
-    [2.1.1.node_exporter](#2.1.1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2.1.1.node_exporter](#2.1.1)
 
-    [2.1.2.和prometheus集成](#2.1.2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2.1.2.和prometheus集成](#2.1.2)
 
 [3.promQL](#3)
 
-  [3.1.样本和数据类型](#3.1)
+&nbsp;&nbsp;&nbsp;&nbsp;[3.1.样本和数据类型](#3.1)
 
-    [3.2.promQL查询](#3.2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.promQL查询](#3.2)
 
-    [3.2.1.基本查询](#3.2.1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.基本查询](#3.2.1)
 
-    [3.2.2.范围查询](#3.2.2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.范围查询](#3.2.2)
 
-    [3.2.3.函数使用](#3.2.3)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.3.函数使用](#3.2.3)
 
 [4.报警](#4)
 
-  [4.1.alertmanager简介](#4.1)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.1.alertmanager简介](#4.1)
 
-  [4.2.alertmanager特性](#4.2)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.2.alertmanager特性](#4.2)
 
-  [4.3.示例](#4.3)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.3.示例](#4.3)
 
-  [4.4.alertmanager部署](#4.4)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.4.alertmanager部署](#4.4)
 
-  [4.5.抑制报警](#4.4)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.5.抑制报警](#4.4)
 
-  [4.6.优化](#4.6)
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.优化](#4.6)
 
 [5.服务发现](#5)
 
-  [5.1.relabel机制](#5)
+&nbsp;&nbsp;&nbsp;&nbsp;[5.1.relabel机制](#5)
 
 **prometheus架构图**
 
